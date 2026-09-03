@@ -1,0 +1,1468 @@
+<!-- V2.8 by9.3-->
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>殊感 · AI 阅读印象整理</title>
+<meta name="description" content="殊感：把零散的阅读触动，整理成属于你的阅读。" />
+<style>
+:root{
+  --bg:#f6f3ed;
+  --paper:#fffdf8;
+  --ink:#26231f;
+  --muted:#7a746b;
+  --line:#e8e2d9;
+  --soft:#f0ebe3;
+  --accent:#5f6a58;
+  --accent2:#dfe6d8;
+  --danger:#8a5f58;
+  --shadow:0 14px 44px rgba(52,44,35,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;line-height:1.6}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+.hero{min-height:92vh;display:flex;align-items:center}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center;width:100%}
+.eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+h1{font-family:Georgia,"Songti SC","STSong",serif;font-size:68px;line-height:1.08;margin:18px 0 22px;font-weight:600}
+.hero-copy{font-size:20px;color:#4d4943;max-width:640px}
+.hero-actions{display:flex;gap:12px;margin-top:34px;flex-wrap:wrap}
+.btn{border:0;border-radius:999px;padding:13px 20px;background:var(--ink);color:white}
+.btn.secondary{background:transparent;border:1px solid #cfc7bb;color:var(--ink)}
+.btn.ghost{background:transparent;color:var(--muted);padding:10px 0}
+.section{padding:88px 0;border-top:1px solid rgba(80,70,58,.08)}
+.section h2{font-family:Georgia,"Songti SC","STSong",serif;font-size:40px;line-height:1.2;margin:0 0 18px}
+.section-lead{max-width:740px;font-size:18px;color:#555048;margin-bottom:36px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:rgba(255,253,248,.78);border:1px solid var(--line);border-radius:20px;padding:24px}
+.card .k{font-size:12px;color:var(--muted);letter-spacing:.08em;margin-bottom:14px}
+.card h3{font-size:19px;margin:0 0 10px}
+.card p{margin:0;color:#625d55;font-size:15px}
+.flow{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:24px}
+.flow-step{border-top:1px solid #bbb3a7;padding-top:14px}
+.flow-step b{display:block;font-size:15px;margin-bottom:6px}
+.flow-step span{font-size:13px;color:var(--muted)}
+.boundary{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.bound{border-radius:18px;padding:22px;border:1px solid var(--line);background:var(--paper)}
+.bound.good{background:#f4f7f0}
+.bound.bad{background:#faf3f1}
+.bound h3{margin:0 0 12px;font-size:16px}
+.bound ul{margin:0;padding-left:18px;color:#5a554d}
+.scope-list{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.scope-box{border:1px solid var(--line);border-radius:18px;padding:22px;background:var(--paper)}
+.scope-box h3{font-size:16px;margin:0 0 12px}
+.scope-box ul{margin:0;padding-left:18px;color:#5d574f}
+.phone-stage{display:flex;justify-content:center;position:relative}
+.phone{width:390px;min-height:760px;background:var(--paper);border-radius:34px;border:1px solid #ddd5ca;box-shadow:var(--shadow);overflow:hidden;position:relative}
+.phone::before{content:"";display:block;width:92px;height:6px;border-radius:99px;background:#d8d1c7;margin:12px auto 2px}
+.screen{display:none;min-height:735px;padding:18px 18px 86px}
+.screen.active{display:block}
+.app-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
+.app-title{font-family:Georgia,"Songti SC","STSong",serif;font-size:26px}
+.small{font-size:12px;color:var(--muted)}
+.icon-btn{border:0;background:transparent;font-size:20px;padding:6px}
+.book-card{display:flex;gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.cover{width:58px;height:78px;border-radius:8px;background:#d9d1c3;display:flex;align-items:center;justify-content:center;padding:7px;text-align:center;font-family:Georgia,"Songti SC","STSong",serif;font-size:13px;color:#514d46}
+.cover.dark{background:#8f8778;color:#fff}
+.cover.green{background:#aeb9a4}
+.book-meta{flex:1}
+.book-meta h4{margin:4px 0 4px;font-size:16px}
+.book-meta p{margin:0;color:var(--muted);font-size:13px}
+.fab{position:absolute;right:18px;bottom:22px;width:52px;height:52px;border-radius:50%;border:0;background:var(--ink);color:white;font-size:26px;box-shadow:0 8px 24px rgba(0,0,0,.16)}
+.tabbar{display:flex;gap:22px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.tab{padding:10px 0;border:0;background:transparent;color:var(--muted);position:relative}
+.tab.active{color:var(--ink)}
+.tab.active:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--ink)}
+.fragment{padding:16px 0;border-bottom:1px solid var(--line)}
+.quote{font-family:Georgia,"Songti SC","STSong",serif;font-size:15px;line-height:1.7;padding-left:12px;border-left:2px solid #c9c1b6}
+.feeling{margin-top:10px;font-size:14px;color:#4f4a43}
+.pill{display:inline-flex;padding:4px 8px;border-radius:999px;background:var(--soft);font-size:11px;color:var(--muted)}
+.primary-wide{width:100%;border:0;border-radius:14px;background:var(--ink);color:#fff;padding:14px;margin-top:18px}
+.secondary-wide{width:100%;border:1px solid var(--line);border-radius:14px;background:transparent;padding:12px;margin-top:10px}
+.input-label{font-size:13px;color:var(--muted);display:block;margin:18px 0 8px}
+textarea,input{width:100%;border:1px solid var(--line);background:#fff;border-radius:14px;padding:13px;outline:none}
+textarea:focus,input:focus{border-color:#a69d91}
+.helper-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+.link-btn{border:0;background:transparent;color:var(--accent);padding:4px 0}
+.route-box{background:var(--soft);border-radius:14px;padding:12px 14px;margin-top:18px;display:flex;justify-content:space-between;align-items:center}
+.section-title{font-size:13px;color:var(--muted);margin:22px 0 8px}
+.ai-card{background:#f4f7f0;border:1px solid #dbe3d4;border-radius:16px;padding:14px;margin-top:12px}
+.ai-note{font-size:12px;color:#697260;margin-bottom:8px}
+.heading-ai{font-family:Georgia,"Songti SC","STSong",serif;font-size:18px;margin:16px 0 8px}
+.heading-ai span{font-family:inherit;font-size:10px;color:#74806d;background:#e6ecdf;border-radius:999px;padding:3px 6px;vertical-align:middle;margin-left:5px}
+.compare-tabs{display:flex;background:var(--soft);border-radius:12px;padding:4px;margin-bottom:14px}
+.compare-tabs button{flex:1;border:0;background:transparent;padding:9px;border-radius:9px;color:var(--muted)}
+.compare-tabs button.active{background:#fff;color:var(--ink);box-shadow:0 1px 5px rgba(0,0,0,.05)}
+.actions3{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:8px;margin-top:18px}
+.actions3 button{border:1px solid var(--line);background:#fff;border-radius:12px;padding:11px 8px}
+.actions3 .accept{background:var(--ink);color:white;border-color:var(--ink)}
+.toast{position:absolute;left:50%;bottom:78px;transform:translateX(-50%);background:#24211e;color:white;padding:9px 14px;border-radius:999px;font-size:12px;opacity:0;pointer-events:none;transition:.25s}
+.toast.show{opacity:1}
+.demo-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.back-link{font-size:13px;color:var(--muted)}
+.demo-wrap{min-height:100vh;padding:54px 20px 80px}
+.demo-intro{text-align:center;max-width:640px;margin:0 auto 26px}
+.demo-intro h2{font-family:Georgia,"Songti SC","STSong",serif;font-size:34px;margin:0 0 8px}
+.demo-intro p{margin:0;color:var(--muted)}
+.note-editor{display:none}
+.note-editor.show{display:block}
+.note-preview.hide{display:none}
+footer{padding:40px 0 64px;color:var(--muted);font-size:13px;border-top:1px solid rgba(80,70,58,.08)}
+.mobile-only-hint{display:none}
+@media(max-width:800px){
+  .hero{min-height:auto;padding:72px 0}
+  .hero-grid{grid-template-columns:1fr;gap:42px}
+  h1{font-size:48px}
+  .cards,.flow,.boundary,.scope-list{grid-template-columns:1fr}
+  .section{padding:64px 0}
+  .phone{width:min(390px,100%);border-radius:24px}
+  .phone-stage{padding:0}
+  .demo-wrap{padding:22px 10px 50px}
+  .demo-intro{padding:0 10px}
+}
+
+.add-book-btn{border:0;background:transparent;color:var(--muted);font-size:13px;padding:7px 0}
+.fab-label{width:auto;height:48px;border-radius:999px;padding:0 17px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:4px}
+.ai-summary{background:#f4f7f0;border:1px solid #dbe3d4;border-radius:16px;padding:14px 15px;margin:12px 0 16px}
+.ai-summary-title{font-size:13px;font-weight:600;margin-bottom:8px}
+.ai-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:12px;color:#66705f}
+.ai-summary .negative{color:#756a64}
+.ai-generated{display:inline-flex;align-items:center;gap:4px;font-size:10px;color:#74806d;background:#e6ecdf;border-radius:999px;padding:3px 6px;vertical-align:middle;margin-left:6px}
+.ai-emphasis{font-weight:700}
+.sticky-actions{position:sticky;bottom:0;margin:18px -18px -86px;padding:10px 18px 16px;background:linear-gradient(to top,var(--paper) 72%,rgba(255,253,248,.92),rgba(255,253,248,0));display:grid;grid-template-columns:1fr 1.2fr;gap:8px;z-index:5}
+.sticky-actions button{border-radius:13px;padding:12px;border:1px solid var(--line);background:#fff}
+.sticky-actions .organize{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+
+#compareBefore .ai-emphasis, #pendingFragments .ai-emphasis{font-weight:400}
+
+
+/* v2.3: stronger organized-note hierarchy */
+.organized-section{
+  margin:24px 0 30px;
+  padding-top:4px;
+}
+.organized-section + .organized-section{
+  border-top:1px solid var(--line);
+  padding-top:24px;
+}
+.organized-section .heading-ai{
+  font-size:20px;
+  line-height:1.35;
+  margin:0 0 14px;
+  font-weight:700;
+  letter-spacing:.01em;
+}
+.organized-section .fragment{
+  margin-left:8px;
+  padding:12px 0;
+}
+.organized-section .fragment + .fragment{
+  border-top:0;
+}
+.organized-section .quote{
+  margin-bottom:8px;
+}
+.organized-section .feeling{
+  line-height:1.8;
+}
+.note-preview .organized-section:first-child{margin-top:8px}
+#structuredContent .organized-section .heading-ai{
+  color:var(--ink);
+}
+#structuredContent .organized-section{
+  margin-bottom:32px;
+}
+
+/* Finished-reading / whole-book impression */
+.read-status{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:13px 14px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:#fff;
+  margin-bottom:14px;
+}
+.status-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:11px;
+  background:var(--soft);
+  color:var(--muted);
+}
+.status-chip.done{
+  background:#e6ecdf;
+  color:#697260;
+}
+.impression-gate{
+  padding:28px 18px;
+  border:1px dashed #d8d0c4;
+  border-radius:18px;
+  text-align:center;
+  color:var(--muted);
+  background:#fffdfa;
+}
+.impression-gate strong{
+  display:block;
+  color:var(--ink);
+  font-size:16px;
+  margin-bottom:7px;
+}
+.impression-block{
+  padding:18px 0 22px;
+  border-bottom:1px solid var(--line);
+}
+.impression-block:last-child{border-bottom:0}
+.impression-block h3{
+  font-size:15px;
+  margin:0 0 6px;
+}
+.impression-block p{
+  font-size:12px;
+  color:var(--muted);
+  margin:0 0 12px;
+}
+.star-row{
+  display:flex;
+  gap:9px;
+  font-size:30px;
+  color:#9a9389;
+  user-select:none;
+}
+.star{
+  border:0;
+  background:transparent;
+  padding:0;
+  font-size:30px;
+  line-height:1;
+  color:#b6aea3;
+}
+.star.selected{color:#6e7565}
+.ai-question{
+  background:#f4f7f0;
+  border:1px solid #dbe3d4;
+  border-radius:16px;
+  padding:14px;
+  margin-top:12px;
+}
+.ai-question .q-label{
+  font-size:11px;
+  color:#74806d;
+  margin-bottom:7px;
+}
+.ai-question .q{
+  font-size:14px;
+  line-height:1.65;
+  margin-bottom:10px;
+}
+.finish-prompt{
+  margin-top:12px;
+  font-size:12px;
+  color:var(--muted);
+}
+
+
+.organizer-hero{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:16px;
+  align-items:center;
+}
+.organizer-pane{
+  background:var(--paper);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:20px;
+  box-shadow:var(--shadow);
+}
+.organizer-kicker{
+  font-size:11px;
+  letter-spacing:.06em;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+.mini-fragment{
+  padding:11px 0;
+  border-bottom:1px solid var(--line);
+}
+.mini-fragment:last-child{border-bottom:0}
+.mini-fragment .quote{font-size:13px}
+.mini-fragment .feeling{font-size:12px;line-height:1.75}
+.organizer-arrow{
+  min-width:124px;
+  text-align:center;
+}
+.organizer-action{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 11px;
+  border-radius:999px;
+  background:var(--ink);
+  color:white;
+  font-size:12px;
+  margin-bottom:7px;
+}
+.mini-section{
+  margin:0 0 18px;
+}
+.mini-section + .mini-section{
+  border-top:1px solid var(--line);
+  padding-top:16px;
+}
+.mini-heading{
+  font-family:Georgia,"Songti SC","STSong",serif;
+  font-weight:700;
+  font-size:16px;
+  margin-bottom:8px;
+}
+.organizer-bottomline{
+  margin-top:12px;
+  padding-top:12px;
+  border-top:1px solid var(--line);
+  font-size:12px;
+  color:#5e6858;
+}
+.bookshelf-group{
+  margin-top:22px;
+}
+.bookshelf-group:first-of-type{margin-top:0}
+.bookshelf-group-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:4px;
+}
+.book-subtle{
+  font-size:11px;
+  color:#8f887e;
+}
+@media(max-width:800px){
+  .organizer-hero{
+    grid-template-columns:1fr;
+  }
+  .organizer-arrow{
+    padding:4px 0;
+  }
+}
+
+
+/* v2.5 interview annotation layer */
+.demo-layout{
+  display:grid;
+  grid-template-columns:minmax(220px,1fr) 420px minmax(220px,1fr);
+  gap:30px;
+  align-items:start;
+  justify-content:center;
+  max-width:1180px;
+  margin:0 auto;
+}
+.annotation-col{
+  position:sticky;
+  top:34px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding-top:54px;
+}
+.annotation-card{
+  background:rgba(255,253,248,.72);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px 16px;
+  color:#5c574f;
+  box-shadow:0 8px 24px rgba(52,44,35,.04);
+}
+.annotation-card .tag{
+  font-size:10px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#7a746b;
+  margin-bottom:7px;
+}
+.annotation-card h4{
+  margin:0 0 7px;
+  font-size:14px;
+  color:var(--ink);
+}
+.annotation-card p{
+  margin:0;
+  font-size:12px;
+  line-height:1.7;
+}
+.annotation-card.active-note{
+  background:#f4f7f0;
+  border-color:#dbe3d4;
+}
+.annotation-card strong{color:var(--ink)}
+.interview-hint{
+  max-width:840px;
+  margin:0 auto 24px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+.interview-hint b{color:var(--ink)}
+.editable{
+  position:relative;
+  border-radius:8px;
+  transition:.15s;
+}
+.editable:hover{
+  background:#f2eee7;
+  outline:1px dashed #cfc6ba;
+}
+.editing{
+  background:#fff;
+  outline:1px solid #bcb2a5;
+  padding:6px 8px;
+}
+.edit-tip{
+  font-size:11px;
+  color:var(--muted);
+  margin:8px 0 2px;
+}
+.demo-badge{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:999px;
+  background:#eee8df;
+  color:#6e675e;
+  font-size:11px;
+  margin-left:8px;
+}
+@media(max-width:1000px){
+  .demo-layout{grid-template-columns:1fr}
+  .annotation-col{position:static;padding-top:0}
+  .annotation-col.left,.annotation-col.right{display:none}
+}
+
+
+.hero-principle{margin-top:26px;display:flex;align-items:center;gap:9px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.hero-principle span:nth-child(odd){padding:6px 9px;border-radius:999px;background:rgba(255,253,248,.78);border:1px solid var(--line)}
+.hero-phone{min-height:650px}
+.hero-phone .fragment{padding:13px 0}
+.hero-phone .organized-section{margin:18px 0 24px}
+.hero-phone .organized-section + .organized-section{padding-top:18px}
+.annotation-card{position:relative;background:#ece7df;border:0!important;box-shadow:none!important;border-radius:12px!important;padding:13px 14px!important}
+.annotation-card.active-note{background:#e2e9dc!important}
+.annotation-layer-title{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#91897f;margin-bottom:-6px}
+.annotation-col.left .annotation-card::after,.annotation-col.right .annotation-card::before{content:"";position:absolute;top:50%;width:34px;height:1px;background:#aaa298}
+.annotation-col.left .annotation-card::before,.annotation-col.right .annotation-card::after{content:"";position:absolute;top:calc(50% - 3px);width:6px;height:6px;border-radius:50%;background:#8e877e}
+.annotation-col.left .annotation-card::after{right:-34px}.annotation-col.left .annotation-card::before{right:-38px}
+.annotation-col.right .annotation-card::before{left:-34px}.annotation-col.right .annotation-card::after{left:-38px}
+.annotation-col.left .annotation-card.active-note::after,.annotation-col.right .annotation-card.active-note::before{background:#79856f}
+.annotation-col.left .annotation-card.active-note::before,.annotation-col.right .annotation-card.active-note::after{background:#79856f}
+
+
+/* v2.8 stable contextual annotation layer */
+.stable-demo-layout{
+  position:relative;
+  display:flex !important;
+  justify-content:center;
+  align-items:flex-start;
+  max-width:1180px;
+  margin:0 auto;
+  min-height:820px;
+  grid-template-columns:none !important;
+}
+.stable-demo-layout .phone-stage{
+  position:relative;
+  z-index:2;
+  margin:0 auto;
+}
+.annotation-overlay{
+  position:absolute;
+  inset:0;
+  z-index:5;
+  pointer-events:none;
+}
+.context-callout{
+  position:absolute;
+  width:210px;
+  padding:12px 13px;
+  border-radius:12px;
+  background:#e9e4dc;
+  color:#5f5951;
+  box-shadow:0 5px 16px rgba(52,44,35,.05);
+  opacity:0;
+  transform:translateY(3px);
+  transition:opacity .14s ease, transform .14s ease;
+}
+.context-callout.visible{opacity:1;transform:none}
+.context-callout .layer-label{
+  font-size:9px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#8a8278;
+  margin-bottom:4px;
+}
+.context-callout .tag{
+  font-size:9px;
+  letter-spacing:.08em;
+  color:#7d756c;
+  margin-bottom:5px;
+}
+.context-callout h4{
+  font-size:13px;
+  line-height:1.45;
+  margin:0 0 6px;
+  color:var(--ink);
+}
+.context-callout p{
+  margin:0;
+  font-size:11px;
+  line-height:1.6;
+}
+.context-line{
+  position:absolute;
+  height:1px;
+  background:#9d958b;
+  transform-origin:0 50%;
+  opacity:0;
+}
+.context-line.visible{opacity:1}
+.context-dot{
+  position:absolute;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:#76836d;
+  opacity:0;
+}
+.context-dot.visible{opacity:1}
+.annotation-target{
+  position:relative;
+}
+.annotation-target.annotation-active::after{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border:1px solid #d4dccd;
+  border-radius:10px;
+  pointer-events:none;
+}
+@media(max-width:1050px){
+  .annotation-overlay{display:none}
+}
+
+</style>
+</head>
+<body>
+
+<main id="landing">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow">AI Product Prototype · Demo v2.8</div>
+        <h1>把零散的阅读触动，<br>整理成属于你的阅读。</h1>
+        <p class="hero-copy">阅读时留下的摘录和感受，本来就真实、琐碎、没有结构。殊感让 AI 只帮你分组、调序和加小标题，不替你写，也不把你的阅读变成一份“标准答案”。</p>
+        <div class="hero-actions">
+          <button class="btn" onclick="enterDemo()">进入 Demo</button>
+          <a class="btn secondary" href="#design-rationale">为什么这样设计</a>
+        </div>
+        <div class="hero-principle">
+          <span>真实但零散</span><span>→</span><span>AI 低损耗整理</span><span>→</span><span>还是你的内容，只是更有结构</span>
+        </div>
+      </div>
+
+      <div class="phone-stage">
+        <div class="phone hero-phone">
+          <div style="padding:22px 18px 24px">
+            <div class="app-top" style="margin-bottom:12px">
+              <div>
+                <div class="small">我的笔记 · 悉达多</div>
+                <div style="font-weight:600">一次整理前后的变化</div>
+              </div>
+              <div class="small" id="heroStateLabel">整理前</div>
+            </div>
+
+            <div id="heroBefore">
+              <div class="fragment">
+                <div class="quote">“知识可以传授，智慧无法传授。”</div>
+                <div class="feeling">我以前总觉得读得越多就是知道得越多，但这里好像在区分“知道”和“成为”。</div>
+              </div>
+              <div class="fragment"><div class="feeling">这里突然让我觉得悉达多一直在拒绝别人替他活。</div></div>
+              <div class="fragment"><div class="quote">“每个人都必须自己找到道路。”</div></div>
+              <div class="fragment"><div class="feeling">前面一直觉得他很固执，但看到这里又觉得，他可能只是很怕接受一个“不是自己活出来”的答案。</div></div>
+              <button class="primary-wide" onclick="toggleHeroOrganize()">✦ AI 帮我整理</button>
+            </div>
+
+            <div id="heroAfter" style="display:none">
+              <div class="organized-section">
+                <div class="heading-ai">智慧无法被给予 <span class="ai-generated">✦ AI</span></div>
+                <div class="fragment">
+                  <div class="quote">“知识可以传授，智慧无法传授。”</div>
+                  <div class="feeling">我以前总觉得读得越多就是知道得越多，但这里好像在区分<span class="ai-emphasis">“知道”</span>和<span class="ai-emphasis">“成为”</span>。</div>
+                </div>
+              </div>
+              <div class="organized-section">
+                <div class="heading-ai">必须自己走的路 <span class="ai-generated">✦ AI</span></div>
+                <div class="fragment">
+                  <div class="quote">“每个人都必须自己找到道路。”</div>
+                  <div class="feeling">这里突然让我觉得悉达多一直在<span class="ai-emphasis">拒绝别人替他活</span>。</div>
+                </div>
+                <div class="fragment"><div class="feeling">前面一直觉得他很固执，但看到这里又觉得，他可能只是很怕接受一个“不是自己活出来”的答案。</div></div>
+              </div>
+              <button class="secondary-wide" onclick="toggleHeroOrganize()">查看整理前</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="design-rationale" class="section">
+    <div class="wrap">
+      <div class="eyebrow">01 · Problem Framing</div>
+      <h2>真正零散的是“我的阅读”，<br>不是这本书。</h2>
+      <p class="section-lead">阅读时留下的划线、摘录和即时感受很真实，却往往散落；书本自身的目录和知识框架很完整，却不等于“我为什么被某句话触动”。殊感试图建立两者之间的中间层。</p>
+      <div class="cards">
+        <div class="card">
+          <div class="k">真实但零散</div>
+          <h3>我的阅读痕迹</h3>
+          <p>摘录、感受、疑问、突然产生的联想。私人而鲜活，但积累后很难回顾。</p>
+        </div>
+        <div class="card">
+          <div class="k">完整但客观</div>
+          <h3>书的结构</h3>
+          <p>章节、目录、知识框架很清楚，但它们描述的是书，不是“我的阅读”。</p>
+        </div>
+        <div class="card">
+          <div class="k">殊感要建立</div>
+          <h3>有结构的“我的阅读”</h3>
+          <p>只整理我真正留下的痕迹，不补齐我没有产生过的内容。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">02 · Why AI</div>
+      <h2>AI 在这里不是作者，<br>而是整理者。</h2>
+      <div class="boundary">
+        <div class="bound good">
+          <h3>AI 可以做</h3>
+          <ul>
+            <li>把相关碎片放到一起</li>
+            <li>调整局部顺序</li>
+            <li>增加结构性小标题</li>
+            <li>把新内容并入已有结构</li>
+          </ul>
+        </div>
+        <div class="bound bad">
+          <h3>AI 不应该做</h3>
+          <ul>
+            <li>替用户总结整本书</li>
+            <li>补出用户没记录的观点</li>
+            <li>生成“你得到的启发”</li>
+            <li>把私人表达改写成 AI 腔</li>
+          </ul>
+        </div>
+      </div>
+      <p class="section-lead" style="margin-top:24px"><strong>原则：Fidelity &gt; Completeness。</strong> 宁可少整理，不要过度整理。</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="eyebrow">03 · MVP Scope</div>
+      <h2>第一版只验证一件事：<br>AI 整理是否真的有价值。</h2>
+      <div class="flow">
+        <div class="flow-step"><b>Capture</b><span>感受 / 原文 / 原文+感受</span></div>
+        <div class="flow-step"><b>Route</b><span>尽量少让用户先分类</span></div>
+        <div class="flow-step"><b>Organize</b><span>分组 · 调序 · 小标题</span></div>
+        <div class="flow-step"><b>Review</b><span>接受 · 修改 · 回退</span></div>
+      </div>
+      <div class="scope-list" style="margin-top:30px">
+        <div class="scope-box">
+          <h3>这版会做</h3>
+          <ul>
+            <li>极简书架与手动创建书</li>
+            <li>低负担 Capture</li>
+            <li>简单 Context Routing</li>
+            <li>AI Organizer 前后对比</li>
+            <li>Human-in-the-loop</li>
+            <li>Lite 整书印象</li>
+          </ul>
+        </div>
+        <div class="scope-box">
+          <h3>这版刻意不做</h3>
+          <ul>
+            <li>OCR / 微信读书 / Kindle 导入</li>
+            <li>Preference Memory</li>
+            <li>复杂 RAG / Multi-Agent</li>
+            <li>AI 阅读陪练与 AI 读后感</li>
+            <li>社交 / 分享 / 商业化</li>
+          </ul>
+        </div>
+      </div>
+      <div class="hero-actions" style="margin-top:32px">
+        <button class="btn" onclick="enterDemo()">进入 Demo</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<section id="demo" class="demo-wrap" style="display:none">
+  <div class="wrap">
+    <div class="demo-header">
+      <button class="btn ghost" onclick="leaveDemo()">← 返回项目介绍</button>
+      <div class="small">Web-hosted · Mobile-first Prototype</div>
+    </div>
+    <div class="demo-intro">
+      <h2>殊感 Demo <span class="demo-badge">讲解型 Prototype</span></h2>
+      <p>手机框内是产品核心交互；界面外讲解只在对应功能出现时显示，不属于 App。</p>
+    </div>
+    <div class="interview-hint"><b>建议体验：</b> 正在读《悉达多》→ 记录 → AI 整理 → 接受；再点“读完了”的《百年孤独》看整书印象。</div>
+
+    <div class="demo-layout stable-demo-layout">
+      <div id="annotationOverlay" class="annotation-overlay" aria-hidden="true"></div>
+<div class="phone-stage">
+      <div class="phone" id="phone">
+        <div id="toast" class="toast">已保存</div>
+
+        <section id="screen-bookshelf" class="screen active">
+          <div class="app-top">
+            <div>
+              <div class="small">下午好</div>
+              <div class="app-title">殊感</div>
+            </div>
+            <button class="add-book-btn" onclick="showCreateBook()">＋ 添加书籍</button>
+          </div>
+
+          <div class="bookshelf-group annotation-target" data-annotation="bookshelf">
+            <div class="bookshelf-group-title">
+              <span>正在读</span>
+              <span class="book-subtle">继续记录与整理</span>
+            </div>
+
+            <div class="book-card" onclick="openBook('悉达多')">
+              <div class="cover green">悉达多</div>
+              <div class="book-meta">
+                <h4>悉达多</h4>
+                <p>赫尔曼·黑塞 · 6 条待整理</p>
+                <p>最近记录：今天</p>
+              </div>
+              <div>›</div>
+            </div>
+
+            <div class="book-card" onclick="openBook('局外人')">
+              <div class="cover">局外人</div>
+              <div class="book-meta">
+                <h4>局外人</h4>
+                <p>阿尔贝·加缪 · 5 条记录</p>
+                <p>最近记录：4 天前</p>
+              </div>
+              <div>›</div>
+            </div>
+          </div>
+
+          <div class="bookshelf-group">
+            <div class="bookshelf-group-title">
+              <span>读完了</span>
+              <span class="book-subtle">回看整书印象</span>
+            </div>
+
+            <div class="book-card" onclick="openBook('百年孤独')">
+              <div class="cover dark">百年孤独</div>
+              <div class="book-meta">
+                <h4>百年孤独</h4>
+                <p>加西亚·马尔克斯 · 已留下整书印象</p>
+                <p>最后记录：2 周前</p>
+              </div>
+              <div>›</div>
+            </div>
+
+            <div class="book-card" onclick="openBook('月亮与六便士')">
+              <div class="cover">月亮与<br>六便士</div>
+              <div class="book-meta">
+                <h4>月亮与六便士</h4>
+                <p>毛姆 · 12 条阅读记录</p>
+                <p>最后记录：1 个月前</p>
+              </div>
+              <div>›</div>
+            </div>
+          </div>
+
+          <button class="fab fab-label annotation-target" data-annotation="main-cta" onclick="showCapture()">＋ 记一下</button>
+        </section>
+
+        <section id="screen-capture" class="screen">
+          <div class="app-top">
+            <button class="icon-btn" onclick="go('screen-bookshelf')">‹</button>
+            <div style="font-weight:600">记下这一刻</div>
+            <div style="width:32px"></div>
+          </div>
+
+          <div class="annotation-target" data-annotation="capture">
+            <label class="input-label">我的感受</label>
+            <textarea id="feelingInput" rows="5" placeholder="刚刚读到这里的时候……"></textarea>
+          </div>
+
+          <button id="addQuoteBtn" class="link-btn" onclick="toggleQuote()">＋ 添加原文</button>
+          <div id="quoteWrap" style="display:none">
+            <label class="input-label">原文</label>
+            <textarea id="quoteInput" rows="4" placeholder="贴入刚刚触动你的原文"></textarea>
+          </div>
+
+          <div class="route-box annotation-target" data-annotation="routing">
+            <div>
+              <div class="small">似乎属于</div>
+              <strong id="routeBook">《悉达多》</strong>
+            </div>
+            <button class="link-btn" onclick="cycleRoute()">换一本</button>
+          </div>
+
+          <button class="primary-wide" onclick="saveCapture()">记下来</button>
+          <button class="secondary-wide" onclick="go('screen-bookshelf')">取消</button>
+        </section>
+
+        <section id="screen-create" class="screen">
+          <div class="app-top">
+            <button class="icon-btn" onclick="go('screen-bookshelf')">‹</button>
+            <div style="font-weight:600">添加一本书</div>
+            <div style="width:32px"></div>
+          </div>
+          <label class="input-label">书名 *</label>
+          <input id="bookTitle" placeholder="例如：月亮与六便士">
+          <label class="input-label">作者</label>
+          <input id="bookAuthor" placeholder="可选">
+          <button class="primary-wide" onclick="createBook()">添加</button>
+        </section>
+
+        <section id="screen-book" class="screen">
+          <div class="app-top">
+            <button class="icon-btn" onclick="go('screen-bookshelf')">‹</button>
+            <div style="text-align:center">
+              <div id="bookName" style="font-weight:600">悉达多</div>
+              <div class="small" id="bookAuthorText">赫尔曼·黑塞</div>
+            </div>
+            <button class="icon-btn">···</button>
+          </div>
+          <div class="tabbar annotation-target" data-annotation="default-entry">
+            <button class="tab active" id="tabNote" onclick="showBookTab('note')">我的笔记</button>
+            <button class="tab" id="tabImpression" onclick="showBookTab('impression')">整书印象</button>
+          </div>
+
+          <div id="bookNoteTab">
+            <div class="section-title">待整理 · <span id="pendingCount">6</span></div>
+            <div id="pendingFragments">
+              <div class="fragment">
+                <div class="quote">“知识可以传授，智慧无法传授。”</div>
+                <div class="feeling">我以前总觉得读得越多就是知道得越多，但这里好像在区分<span class="ai-emphasis">“知道”</span>和<span class="ai-emphasis">“成为”</span>。</div>
+              </div>
+              <div class="fragment">
+                <div class="feeling">这里突然让我觉得悉达多一直在<span class="ai-emphasis">拒绝别人替他活</span>。</div>
+              </div>
+              <div class="fragment">
+                <div class="quote">“每个人都必须自己找到道路。”</div>
+              </div>
+              <div class="fragment">
+                <div class="feeling">前面一直觉得他很固执，但看到这里又觉得，他可能只是很怕接受一个“不是自己活出来”的答案。</div>
+              </div>
+              <div class="fragment">
+                <div class="quote">“河水同时存在于一切地方。”</div>
+                <div class="feeling">这一段我没有完全懂，但它让我突然觉得时间可能不是一条直线。</div>
+              </div>
+              <div class="fragment">
+                <div class="feeling">我最喜欢的不是他最后找到了答案，而是他终于<span class="ai-emphasis">不再急着找答案</span>。</div>
+              </div>
+            </div>
+
+            <div id="structuredArea" style="display:none">
+              <div class="section-title">我的笔记</div>
+              <div class="edit-tip">点击小标题、原文或感受可以直接修改</div>
+              <div id="structuredContent"></div>
+            </div>
+            <div class="sticky-actions">
+              <button onclick="showCaptureFromBook()">＋ 记一下</button>
+              <button class="organize" onclick="go('screen-organize')">✦ 帮我整理</button>
+            </div>
+          </div>
+
+          
+          <div id="bookImpressionTab" style="display:none">
+            <div id="impressionUnlocked">
+              <div class="impression-block">
+                <h3>1. 先给这段阅读一个总体感受</h3>
+                <p>最轻的一步，评分可选。</p>
+                <div class="star-row" id="starRow">
+                  <button class="star" onclick="setStars(1)">☆</button>
+                  <button class="star" onclick="setStars(2)">☆</button>
+                  <button class="star" onclick="setStars(3)">☆</button>
+                  <button class="star" onclick="setStars(4)">☆</button>
+                  <button class="star" onclick="setStars(5)">☆</button>
+                </div>
+              </div>
+
+              <div class="impression-block">
+                <h3>2. 这本书最后留给你的是什么？</h3>
+                <p>不要求总结完整，只写你真的想留下的。</p>
+                <textarea id="impressionText" rows="6" placeholder="写下这本书最终留给你的东西……">我最后记住的不是布恩迪亚家族发生了多少事，而是那种不断重复、又彼此错过的孤独感。</textarea>
+              </div>
+
+              <div class="impression-block annotation-target" data-annotation="ai-questions">
+                <h3>3. AI 根据你的笔记，留了两个问题</h3>
+                <p>AI 只负责提问，答案仍然由你自己写。</p>
+
+                <div class="ai-question">
+                  <div class="q-label">✦ 根据你的阅读痕迹生成</div>
+                  <div class="q">你在几次笔记里都提到了“重复”和“孤独”。读完整本书后，你觉得这两个感受之间是什么关系？</div>
+                  <textarea rows="4" placeholder="写下你的回答……">我一开始把“孤独”理解成个人性格，读完后更像是一种家族里不断复制的模式。</textarea>
+                </div>
+
+                <div class="ai-question">
+                  <div class="q-label">✦ 根据你的阅读痕迹生成</div>
+                  <div class="q">你曾经写“一个人好像一直被自己的记忆牵着走”。读完后，你现在还会这样理解这本书里的人吗？</div>
+                  <textarea rows="4" placeholder="写下你的回答……">会。以前觉得记忆只是背景，后来更觉得它决定了一个人能不能真正和过去告别。</textarea>
+                </div>
+              </div>
+
+              <button class="primary-wide" onclick="showToast('整书印象已保存')">保存整书印象</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="screen-organize" class="screen">
+          <div class="app-top">
+            <button class="icon-btn" onclick="go('screen-book')">‹</button>
+            <div style="font-weight:600">AI 整理</div>
+            <div style="width:32px"></div>
+          </div>
+
+          <div class="ai-summary annotation-target" data-annotation="ai-boundary">
+            <div class="ai-summary-title">这次 AI 做了什么</div><div class="small" style="margin-bottom:8px">这些 AI 标识只在确认前显示；接受后会自动隐藏。</div>
+            <div class="ai-summary-grid">
+              <div>✓ 整理为 3 个主题</div>
+              <div>✓ 调整 2 处顺序</div>
+              <div>✓ 添加 3 个小标题</div>
+              <div>✓ 强调 4 处已有关键词</div>
+              <div class="negative">未新增你的观点</div>
+              <div class="negative">未改写你的原话</div>
+            </div>
+          </div>
+
+          <div class="compare-tabs" style="margin-top:14px">
+            <button id="beforeTabBtn" onclick="showCompare('before')">整理前</button>
+            <button id="afterTabBtn" class="active" onclick="showCompare('after')">整理后</button>
+          </div>
+
+          <div id="compareBefore" style="display:none">
+            <div class="fragment">
+              <div class="quote">“知识可以传授，智慧无法传授。”</div>
+              <div class="feeling">我以前总觉得读得越多就是知道得越多，但这里好像在区分<span class="ai-emphasis">“知道”</span>和<span class="ai-emphasis">“成为”</span>。</div>
+            </div>
+            <div class="fragment"><div class="feeling">这里突然让我觉得悉达多一直在<span class="ai-emphasis">拒绝别人替他活</span>。</div></div>
+            <div class="fragment"><div class="quote">“每个人都必须自己找到道路。”</div></div>
+            <div class="fragment"><div class="feeling">前面一直觉得他很固执，但看到这里又觉得，他可能只是很怕接受一个“不是自己活出来”的答案。</div></div>
+            <div class="fragment">
+              <div class="quote">“河水同时存在于一切地方。”</div>
+              <div class="feeling">这一段我没有完全懂，但它让我突然觉得时间可能不是一条直线。</div>
+            </div>
+            <div class="fragment"><div class="feeling">我最喜欢的不是他最后找到了答案，而是他终于<span class="ai-emphasis">不再急着找答案</span>。</div></div>
+          </div>
+
+          <div id="compareAfter" class="annotation-target" data-annotation="ai-preview">
+            <div class="note-preview" id="notePreview">
+              <div class="organized-section">
+                <div class="heading-ai">智慧无法被给予 <span class="ai-generated">✦ AI</span></div>
+                <div class="fragment">
+                  <div class="quote">“知识可以传授，智慧无法传授。”</div>
+                  <div class="feeling">我以前总觉得读得越多就是知道得越多，但这里好像在区分<span class="ai-emphasis">“知道”</span>和<span class="ai-emphasis">“成为”</span>。</div>
+                </div>
+              </div>
+
+              <div class="organized-section">
+                <div class="heading-ai">必须自己走的路 <span class="ai-generated">✦ AI</span></div>
+                <div class="fragment"><div class="quote">“每个人都必须自己找到道路。”</div></div>
+                <div class="fragment"><div class="feeling">这里突然让我觉得悉达多一直在<span class="ai-emphasis">拒绝别人替他活</span>。</div></div>
+                <div class="fragment"><div class="feeling">前面一直觉得他很固执，但看到这里又觉得，他可能只是很怕接受一个“不是自己活出来”的答案。</div></div>
+              </div>
+
+              <div class="organized-section">
+                <div class="heading-ai">不再急着寻找答案 <span class="ai-generated">✦ AI</span></div>
+                <div class="fragment">
+                  <div class="quote">“河水同时存在于一切地方。”</div>
+                  <div class="feeling">这一段我没有完全懂，但它让我突然觉得时间可能不是一条直线。</div>
+                </div>
+                <div class="fragment"><div class="feeling">我最喜欢的不是他最后找到了答案，而是他终于<span class="ai-emphasis">不再急着找答案</span>。</div></div>
+              </div>
+</div>
+
+            <div class="note-editor" id="noteEditor">
+              <textarea rows="18">智慧无法被给予
+
+“知识可以传授，智慧无法传授。”
+我以前总觉得读得越多就是知道得越多，但这里好像在区分<span class="ai-emphasis">“知道”</span>和<span class="ai-emphasis">“成为”</span>。
+
+必须自己走的路
+
+“每个人都必须自己找到道路。”
+这里突然让我觉得悉达多一直在<span class="ai-emphasis">拒绝别人替他活</span>。
+前面一直觉得他很固执，但看到这里又觉得，他可能只是很怕接受一个“不是自己活出来”的答案。
+
+不再急着寻找答案
+
+“河水同时存在于一切地方。”
+这一段我没有完全懂，但它让我突然觉得时间可能不是一条直线。
+我最喜欢的不是他最后找到了答案，而是他终于<span class="ai-emphasis">不再急着找答案</span>。</textarea>
+            </div>
+
+            <div class="actions3 annotation-target" data-annotation="human-loop">
+              <button onclick="rollbackOrganize()">回退</button>
+              <button onclick="toggleEdit()">编辑</button>
+              <button class="accept" onclick="acceptOrganize()">接受整理</button>
+            </div>
+          </div>
+        </section>
+      </div>
+      </div>
+</div>
+  </div>
+</section>
+
+<footer id="landingFooter">
+  <div class="wrap">殊感 · Demo v2.8 · 用于 AI 产品经理作品集与面试展示</div>
+</footer>
+
+<script>
+
+let heroOrganized = false;
+function toggleHeroOrganize(){
+  heroOrganized = !heroOrganized;
+  document.getElementById('heroBefore').style.display = heroOrganized ? 'none' : 'block';
+  document.getElementById('heroAfter').style.display = heroOrganized ? 'block' : 'none';
+  document.getElementById('heroStateLabel').textContent = heroOrganized ? '整理后' : '整理前';
+}
+
+let currentBook = '悉达多';
+let routeIndex = 0;
+const routeBooks = ['《悉达多》','《局外人》','《百年孤独》'];
+let newFragments = [];
+
+const finishedStructuredNotes = {
+  '百年孤独': `
+    <div class="organized-section">
+      <div class="heading-ai editable" onclick="makeInlineEditable(this)">重复发生的孤独</div>
+      <div class="fragment">
+        <div class="quote editable" onclick="makeInlineEditable(this)">“过去都是虚假的，回忆是一条没有尽头的路。”</div>
+        <div class="feeling editable" onclick="makeInlineEditable(this)">这里让我第一次觉得，这个家族真正无法逃开的不是命运，而是不断重复同一种孤独。</div>
+      </div>
+    </div>
+    <div class="organized-section">
+      <div class="heading-ai editable" onclick="makeInlineEditable(this)">记忆把人留在过去</div>
+      <div class="fragment">
+        <div class="feeling editable" onclick="makeInlineEditable(this)">很多人看起来在向前生活，其实一直被过去牵着走。</div>
+      </div>
+    </div>`,
+  '月亮与六便士': `
+    <div class="organized-section">
+      <div class="heading-ai editable" onclick="makeInlineEditable(this)">忠于自己，也可能伤害别人</div>
+      <div class="fragment">
+        <div class="feeling editable" onclick="makeInlineEditable(this)">我一直很矛盾：我佩服他的彻底，但又很难接受这种彻底建立在对别人的伤害上。</div>
+      </div>
+    </div>`
+};
+
+let starValue = 0;
+
+function setStars(n){
+  starValue=n;
+  document.querySelectorAll('#starRow .star').forEach((el,i)=>{
+    el.textContent = i<n ? '★':'☆';
+    el.classList.toggle('selected', i<n);
+  });
+}
+
+
+function enterDemo(){
+  document.getElementById('landing').style.display='none';
+  document.getElementById('landingFooter').style.display='none';
+  document.getElementById('demo').style.display='block';
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function leaveDemo(){
+  document.getElementById('landing').style.display='block';
+  document.getElementById('landingFooter').style.display='block';
+  document.getElementById('demo').style.display='none';
+  go('screen-bookshelf');
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function go(id){
+  document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  updateAnnotations(id);
+}
+
+
+const annotationConfig = {
+  'bookshelf': {
+    side:'left', tag:'IA', title:'在读 / 读完：轻量分区',
+    body:'状态只影响默认进入位置，不在单书页持续打扰用户。'
+  },
+  'main-cta': {
+    side:'right', tag:'Scope', title:'“记一下”是首页主动作',
+    body:'Capture 是 MVP 主行为；添加书籍被刻意弱化。'
+  },
+  'capture': {
+    side:'left', tag:'Capture Easy', title:'不先让用户选记录类型',
+    body:'感受、原文、原文+感受自然覆盖，减少阅读被表单打断。'
+  },
+  'routing': {
+    side:'right', tag:'Context Routing', title:'系统先建议归书',
+    body:'降低每次记录都手动选书的成本；不确定时用户仍可更换。'
+  },
+  'default-entry': {
+    side:'left', tag:'Task-oriented Entry', title:'不同阶段，不同默认落点',
+    body:'在读书优先回到笔记；读完书优先进入整书印象。'
+  },
+  'ai-boundary': {
+    side:'left', tag:'AI Boundary', title:'先告诉用户 AI 做了什么',
+    body:'分组、调序、小标题、少量强调；不新增观点，不改写原话。'
+  },
+  'ai-preview': {
+    side:'right', tag:'Transparency', title:'AI 新增结构只在确认前显式标记',
+    body:'接受后 ✦ AI 标识消失，结果成为自然的正式笔记。'
+  },
+  'human-loop': {
+    side:'right', tag:'Human-in-the-loop', title:'AI 结果不是最终答案',
+    body:'用户可以接受、直接编辑或回退。'
+  },
+  'ai-questions': {
+    side:'right', tag:'AI Role', title:'AI 可以提问，但不替用户回答',
+    body:'根据已有阅读痕迹提出问题，答案仍由用户自己完成。'
+  }
+};
+
+function getActiveScreen(){
+  return document.querySelector('#phone .screen.active');
+}
+
+function ensureAnnotationNodes(key){
+  const overlay=document.getElementById('annotationOverlay');
+  let card=overlay.querySelector(`[data-callout="${key}"]`);
+  if(card) return {
+    card,
+    line:overlay.querySelector(`[data-line="${key}"]`),
+    dot:overlay.querySelector(`[data-dot="${key}"]`)
+  };
+
+  const cfg=annotationConfig[key];
+
+  card=document.createElement('div');
+  card.className='context-callout';
+  card.dataset.callout=key;
+  card.innerHTML=`
+    <div class="layer-label">讲解层 · 不属于 App</div>
+    <div class="tag">${cfg.tag}</div>
+    <h4>${cfg.title}</h4>
+    <p>${cfg.body}</p>`;
+  overlay.appendChild(card);
+
+  const line=document.createElement('div');
+  line.className='context-line';
+  line.dataset.line=key;
+  overlay.appendChild(line);
+
+  const dot=document.createElement('div');
+  dot.className='context-dot';
+  dot.dataset.dot=key;
+  overlay.appendChild(dot);
+
+  return {card,line,dot};
+}
+
+function clearAnnotations(){
+  const overlay=document.getElementById('annotationOverlay');
+  if(!overlay) return;
+  overlay.querySelectorAll('.context-callout,.context-line,.context-dot').forEach(el=>el.classList.remove('visible'));
+  document.querySelectorAll('.annotation-target').forEach(el=>el.classList.remove('annotation-active'));
+}
+
+function refreshContextAnnotations(){
+  const overlay=document.getElementById('annotationOverlay');
+  const layout=document.querySelector('.stable-demo-layout');
+  const phone=document.getElementById('phone');
+  const active=getActiveScreen();
+  if(!overlay || !layout || !phone || !active || window.innerWidth<=1050){
+    clearAnnotations();
+    return;
+  }
+
+  clearAnnotations();
+
+  const layoutRect=layout.getBoundingClientRect();
+  const phoneRect=phone.getBoundingClientRect();
+  const viewportTop=window.scrollY;
+  const viewportBottom=viewportTop + window.innerHeight;
+
+  active.querySelectorAll('.annotation-target[data-annotation]').forEach(target=>{
+    const key=target.dataset.annotation;
+    const cfg=annotationConfig[key];
+    if(!cfg) return;
+
+    const tr=target.getBoundingClientRect();
+
+    // 只要实际 UI 元素在当前浏览器可视区域附近才显示
+    const absTop=tr.top + window.scrollY;
+    const absBottom=tr.bottom + window.scrollY;
+    if(absBottom < viewportTop+40 || absTop > viewportBottom-40) return;
+
+    const {card,line,dot}=ensureAnnotationNodes(key);
+
+    // target anchor
+    const targetY=(tr.top + tr.height/2) - layoutRect.top;
+    const targetX=(cfg.side==='left' ? phoneRect.left : phoneRect.right) - layoutRect.left;
+
+    // card side
+    card.style.left = cfg.side==='left' ? '24px' : 'auto';
+    card.style.right = cfg.side==='right' ? '24px' : 'auto';
+
+    const cardH=card.offsetHeight || 90;
+    let top=targetY-cardH/2;
+    top=Math.max(8, Math.min(top, layoutRect.height-cardH-8));
+    card.style.top=`${top}px`;
+
+    // need next frame dimensions after positioning
+    const cr=card.getBoundingClientRect();
+    const startX=(cfg.side==='left' ? cr.right : cr.left)-layoutRect.left;
+    const startY=(cr.top+cr.height/2)-layoutRect.top;
+
+    const dx=targetX-startX;
+    const dy=targetY-startY;
+    const length=Math.sqrt(dx*dx+dy*dy);
+    const angle=Math.atan2(dy,dx)*180/Math.PI;
+
+    line.style.left=`${startX}px`;
+    line.style.top=`${startY}px`;
+    line.style.width=`${length}px`;
+    line.style.transform=`rotate(${angle}deg)`;
+
+    dot.style.left=`${targetX-3.5}px`;
+    dot.style.top=`${targetY-3.5}px`;
+
+    target.classList.add('annotation-active');
+    card.classList.add('visible');
+    line.classList.add('visible');
+    dot.classList.add('visible');
+  });
+}
+
+function scheduleAnnotationRefresh(){
+  requestAnimationFrame(refreshContextAnnotations);
+}
+
+function updateAnnotations(screenId){
+  scheduleAnnotationRefresh();
+}
+
+function showCapture(){ routeIndex=0; document.getElementById('routeBook').textContent=routeBooks[routeIndex]; go('screen-capture'); }
+function showCaptureFromBook(){ 
+  routeIndex = routeBooks.findIndex(x=>x.includes(currentBook));
+  if(routeIndex<0) routeIndex=0;
+  document.getElementById('routeBook').textContent=routeBooks[routeIndex];
+  go('screen-capture');
+}
+function toggleQuote(){
+  const q=document.getElementById('quoteWrap');
+  const open=q.style.display==='none';
+  q.style.display=open?'block':'none';
+  document.getElementById('addQuoteBtn').textContent=open?'－ 收起原文':'＋ 添加原文';
+}
+function cycleRoute(){
+  routeIndex=(routeIndex+1)%routeBooks.length;
+  document.getElementById('routeBook').textContent=routeBooks[routeIndex];
+}
+function saveCapture(){
+  const feeling=document.getElementById('feelingInput').value.trim();
+  const quote=document.getElementById('quoteInput').value.trim();
+  if(!feeling && !quote){ showToast('至少留下一点内容'); return; }
+  const book=routeBooks[routeIndex].replace(/[《》]/g,'');
+  newFragments.push({book, feeling, quote});
+  currentBook=book;
+  document.getElementById('feelingInput').value='';
+  document.getElementById('quoteInput').value='';
+  document.getElementById('quoteWrap').style.display='none';
+  document.getElementById('addQuoteBtn').textContent='＋ 添加原文';
+  openBook(book);
+  injectNewFragments();
+  showToast('已经记下来');
+}
+function injectNewFragments(){
+  const wrap=document.getElementById('pendingFragments');
+  if(!wrap || currentBook!=='悉达多') return;
+  wrap.querySelectorAll('.new-fragment').forEach(x=>x.remove());
+  newFragments.filter(x=>x.book==='悉达多').forEach(x=>{
+    const d=document.createElement('div'); d.className='fragment new-fragment';
+    d.innerHTML=(x.quote?`<div class="quote">${escapeHTML(x.quote)}</div>`:'')+(x.feeling?`<div class="feeling">${escapeHTML(x.feeling)}</div>`:'');
+    wrap.appendChild(d);
+  });
+  document.getElementById('pendingCount').textContent=6+newFragments.filter(x=>x.book==='悉达多').length;
+}
+function openBook(name){
+  currentBook=name;
+  document.getElementById('bookName').textContent=name;
+
+  const meta = {
+    '悉达多': {author:'赫尔曼·黑塞', status:'reading'},
+    '局外人': {author:'阿尔贝·加缪', status:'reading'},
+    '百年孤独': {author:'加西亚·马尔克斯', status:'finished'},
+    '月亮与六便士': {author:'毛姆', status:'finished'}
+  };
+  const info = meta[name] || {author:'',status:'reading'};
+  document.getElementById('bookAuthorText').textContent=info.author;
+
+  const impressionTab = document.getElementById('tabImpression');
+  impressionTab.style.display = info.status==='finished' ? 'block' : 'none';
+
+  if(info.status==='finished'){
+    showBookTab('impression');
+    prepareFinishedBook(name);
+    go('screen-book');
+    setTimeout(()=>window.scrollTo({top:document.body.scrollHeight-520,behavior:'smooth'}),80);
+  } else {
+    showBookTab('note');
+    go('screen-book');
+    injectNewFragments();
+    setTimeout(()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}),80);
+  }
+}
+
+function prepareFinishedBook(name){
+  const txt=document.getElementById('impressionText');
+  const qs=document.querySelectorAll('.ai-question .q');
+  const answers=document.querySelectorAll('.ai-question textarea');
+
+  if(name==='百年孤独'){
+    txt.value='我最后记住的不是布恩迪亚家族发生了多少事，而是那种不断重复、又彼此错过的孤独感。';
+    qs[0].textContent='你在几次笔记里都提到了“重复”和“孤独”。读完整本书后，你觉得这两个感受之间是什么关系？';
+    qs[1].textContent='你曾经写“一个人好像一直被自己的记忆牵着走”。读完后，你现在还会这样理解这本书里的人吗？';
+    answers[0].value='我一开始把“孤独”理解成个人性格，读完后更像是一种家族里不断复制的模式。';
+    answers[1].value='会。以前觉得记忆只是背景，后来更觉得它决定了一个人能不能真正和过去告别。';
+    setStars(5);
+  } else {
+    txt.value='我最后留下的是对“自由”这件事更复杂的感觉：它可能意味着忠于自己，也可能意味着伤害别人。';
+    qs[0].textContent='你在几条笔记里都提到“忠于自己”。读完整本书后，你还会把它当成一个完全正面的词吗？';
+    qs[1].textContent='你曾经对斯特里克兰德的冷酷很反感，但又承认他的选择很彻底。现在回看，这种矛盾还在吗？';
+    answers[0].value='不会。我现在更觉得“忠于自己”如果完全不考虑别人，也可能变成一种暴力。';
+    answers[1].value='还在，而且这可能就是我对这本书印象最深的地方。';
+    setStars(4);
+  }
+}
+
+function showCreateBook(){go('screen-create')}
+function createBook(){
+  const title=document.getElementById('bookTitle').value.trim();
+  if(!title){showToast('先写书名');return}
+  document.getElementById('bookTitle').value='';
+  document.getElementById('bookAuthor').value='';
+  go('screen-bookshelf'); showToast('已添加到书架');
+}
+function showBookTab(tab){
+  const note=tab==='note';
+  document.getElementById('bookNoteTab').style.display=note?'block':'none';
+  document.getElementById('bookImpressionTab').style.display=note?'none':'block';
+  document.getElementById('tabNote').classList.toggle('active',note);
+  document.getElementById('tabImpression').classList.toggle('active',!note);
+
+  if(note && finishedStructuredNotes[currentBook]){
+    document.getElementById('pendingFragments').style.display='none';
+    document.getElementById('pendingCount').textContent='0';
+    document.getElementById('structuredArea').style.display='block';
+    document.getElementById('structuredContent').innerHTML=finishedStructuredNotes[currentBook];
+    bindEditableNodes(document.getElementById('structuredContent'));
+  } else if(note && currentBook==='悉达多'){
+    document.getElementById('pendingFragments').style.display='block';
+  }
+}
+function showCompare(which){
+  const before=which==='before';
+  document.getElementById('compareBefore').style.display=before?'block':'none';
+  document.getElementById('compareAfter').style.display=before?'none':'block';
+  document.getElementById('beforeTabBtn').classList.toggle('active',before);
+  document.getElementById('afterTabBtn').classList.toggle('active',!before);
+}
+function toggleEdit(){
+  document.getElementById('notePreview').classList.toggle('hide');
+  document.getElementById('noteEditor').classList.toggle('show');
+}
+function rollbackOrganize(){
+  go('screen-book'); showToast('已回到整理前');
+}
+function acceptOrganize(){
+  const temp=document.createElement('div');
+  temp.innerHTML=document.getElementById('notePreview').innerHTML;
+
+  // AI 标识只用于整理预览；接受后消失。
+  temp.querySelectorAll('.ai-generated').forEach(el=>el.remove());
+
+  // 正式笔记仍然可编辑：标题、摘录、感受都属于用户可持续维护的内容。
+  temp.querySelectorAll('.heading-ai, .quote, .feeling').forEach(el=>{
+    el.classList.add('editable');
+    el.setAttribute('title','点击修改');
+    el.addEventListener('click',()=>makeInlineEditable(el));
+  });
+
+  document.getElementById('structuredContent').innerHTML='';
+  while(temp.firstChild){
+    document.getElementById('structuredContent').appendChild(temp.firstChild);
+  }
+  bindEditableNodes(document.getElementById('structuredContent'));
+  document.getElementById('structuredArea').style.display='block';
+  document.getElementById('pendingFragments').style.display='none';
+  document.getElementById('pendingCount').textContent='0';
+  go('screen-book');
+  setTimeout(()=>window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'}),80);
+  showToast('已接受整理，可继续修改这份笔记');
+}
+
+function bindEditableNodes(root){
+  root.querySelectorAll('.heading-ai, .quote, .feeling').forEach(el=>{
+    el.classList.add('editable');
+    el.setAttribute('title','点击修改');
+    el.onclick=()=>makeInlineEditable(el);
+  });
+}
+
+function makeInlineEditable(el){
+  if(el.getAttribute('contenteditable')==='true') return;
+  el.setAttribute('contenteditable','true');
+  el.classList.add('editing');
+  el.focus();
+  const finish=()=>{
+    el.removeAttribute('contenteditable');
+    el.classList.remove('editing');
+    el.onblur=null;
+    showToast('修改已保存');
+  };
+  el.onblur=finish;
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1800);
+}
+function escapeHTML(str){
+  return str.replace(/[&<>'"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+}
+window.addEventListener('scroll', scheduleAnnotationRefresh, {passive:true});
+window.addEventListener('resize', scheduleAnnotationRefresh);
+window.addEventListener('load', scheduleAnnotationRefresh);
+</script>
+</body>
+</html>
